@@ -1,0 +1,141 @@
+
+  html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background: #F0E9E6;
+}
+*, *::before, *::after { box-sizing: border-box; }
+body {
+  overflow: auto;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: geometricPrecision;
+}
+/* Figma exports use absolutely positioned layers.
+    Keep every exported layer in the document flow and prevent accidental
+    clipping by browser defaults. */
+[data-svg-wrapper] {
+  position: absolute !important;
+  overflow: visible !important;
+  visibility: visible !important;
+}
+[data-svg-wrapper] > svg {
+  display: block;
+  overflow: visible;
+  visibility: visible;
+}
+img {
+  display: block;
+  max-width: none;
+  visibility: visible;
+}
+body > #figma-canvas {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: visible !important;
+  isolation: isolate;
+}
+/* Do not let generic page CSS hide exported vector/text layers. */
+#figma-canvas > div,
+#figma-canvas > img {
+  visibility: visible;
+}
+
+/* ============================
+  Responsive layout
+  ============================ */
+
+/* The exported design is 1920x1080.
+  The canvas itself follows the viewport. */
+html, body {
+width: 100%;
+height: 100%;
+min-width: 0 !important;
+min-height: 0 !important;
+overflow: hidden !important;
+}
+
+body > #figma-canvas {
+width: 100vw !important;
+height: 100vh !important;
+min-width: 0 !important;
+min-height: 0 !important;
+overflow: hidden !important;
+}
+
+/* web1~4 / file:
+  each group becomes its own fixed-size parent coordinate system.
+  The group moves responsively; its children keep their original
+  relative positions and sizes. */
+#web1,
+#web2,
+#web3,
+#web4,
+#file {
+position: absolute !important;
+overflow: visible !important;
+transform-origin: left top !important;
+z-index: 10;
+}
+
+#calendar {
+position: absolute !important;
+left: 0 !important;
+top: 0 !important;
+transform: translateX(-200px) !important;
+transform-origin: left top !important;
+z-index: 20;
+pointer-events: none;
+}
+
+/* bar:
+  fixed to the bottom and scaled as one complete unit to exactly match
+  the current viewport width. Its internal design remains 1920x53px. */
+#bar {
+position: absolute !important;
+left: 0 !important;
+top: auto !important;
+bottom: 0 !important;
+width: 1920px !important;
+height: 53px !important;
+overflow: visible !important;
+transform-origin: left bottom !important;
+z-index: 50;
+}
+
+#bar > div {
+position: absolute !important;
+}
+
+#bar > div:nth-child(1) {
+left: 0 !important;
+top: 0 !important;
+width: 1920px !important;
+height: 53px !important;
+}
+
+#bar > div:nth-child(2) {
+top: 1px !important;
+}
+
+#bar > div:nth-child(3),
+#bar > div:nth-child(4) {
+top: 6px !important;
+}
+
+/* Background wrapper is created by JS.
+  It never scales below the original 1920x1080 size, and scales up
+  with a cover-style scale so no empty background area is visible. */
+.responsive-bg-layer {
+position: absolute !important;
+left: 50% !important;
+top: 50% !important;
+width: 1920px !important;
+height: 1080px !important;
+transform-origin: center center !important;
+z-index: 0;
+pointer-events: none;
+overflow: visible !important;
+}
