@@ -218,7 +218,7 @@
 
       // 크기만 공통 균일 scale로 조정한다.
       group.style.transformOrigin = "top left";
-      group.style.transform = `scale(${groupScale})`;
+      group.style.setProperty("--group-scale", String(groupScale));
     }
 
     // 배경은 화면을 꽉 채우는 cover 방식으로 계산한다.

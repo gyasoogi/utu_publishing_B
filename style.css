@@ -78,13 +78,41 @@ position: absolute !important;
 overflow: visible !important;
 transform-origin: left top !important;
 z-index: 10;
+opacity: 0;
+filter: blur(12px);
+transform: translate3d(0, -60px, 0) scale(var(--group-scale, 1));
+animation: webEntrance 1100ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+animation-delay: var(--intro-delay, 0ms);
+}
+
+#web1 { --intro-delay: 0ms; }
+#web2 { --intro-delay: 110ms; }
+#web3 { --intro-delay: 220ms; }
+#web4 { --intro-delay: 330ms; }
+#file { --intro-delay: 440ms; }
+
+@keyframes webEntrance {
+  0% {
+    opacity: 0;
+    filter: blur(14px);
+    transform: translate3d(0, -60px, 0) scale(calc(var(--group-scale, 1) * 0.98));
+  }
+  30% {
+    opacity: 0.5;
+    filter: blur(7px);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0);
+    transform: translate3d(0, 0, 0) scale(var(--group-scale, 1));
+  }
 }
 
 #calendar {
 position: absolute !important;
 left: 0 !important;
 top: 0 !important;
-transform: translateX(-200px) !important;
+transform: translateX(-140px) !important;
 transform-origin: left top !important;
 z-index: 20;
 pointer-events: none;
